@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: khaliljaouani/tpcitationsbackend:v1.1
+    ports:
+      - "5001:5000"
+    networks:
+      - quotes-net
+
+  frontend:
+    build:
+      context: ./frontend
+    image: khaliljaouani/tpcitationsfrontend:v1.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - quotes-net
+
+networks:
+  quotes-net:
+    driver: bridge
